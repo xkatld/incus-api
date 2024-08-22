@@ -21,3 +21,9 @@ pip install -r requirements.txt
 cd ./incus-api
 uvicorn app.main:app --reload
 ~~~
+# api示例
+~~~
+curl -X POST "http://localhost:8000/containers/" -H "Content-Type: application/json" -d '{"cpu": 2, "memory": 1024, "disk": 20, "download_speed": 100, "upload_speed": 10, "ipv6": "N", "system": "debian11"}'
+
+curl -X POST "http://localhost:8000/instances/kd5pzzme/stop"
+~~~
