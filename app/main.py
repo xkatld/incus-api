@@ -12,7 +12,8 @@ async def startup_event():
     
     # 确保 buildone.sh 有执行权限
     app_dir = os.path.dirname(os.path.abspath(__file__))
-    buildone_path = os.path.join(app_dir, "buildone.sh")
+    shell_dir = os.path.join(app_dir, "shell")
+    buildone_path = os.path.join(shell_dir, "buildone.sh")
     current_permissions = os.stat(buildone_path).st_mode
     os.chmod(buildone_path, current_permissions | stat.S_IEXEC)
 
