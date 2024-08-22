@@ -13,5 +13,11 @@ bash ./incus-api/app/shell/buildone.sh
 ~~~
 安装python3依赖
 ~~~
-pip install -r ./incus-api/requirements.txt
+cd ./incus-api
+pip install -r requirements.txt
+~~~
+运行
+~~~
+cd ./incus-api
+uvicorn app.main:app --reload
 ~~~
