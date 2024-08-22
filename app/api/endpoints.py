@@ -25,9 +25,10 @@ async def create_container(container: ContainerCreate):
     ssh_port = generate_random_ssh_port()
     port_start, port_end = generate_random_port_range()
 
-    # 获取 app 目录的路径
+    # 获取 shell 目录的路径
     app_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    buildone_path = os.path.join(app_dir, "buildone.sh")
+    shell_dir = os.path.join(app_dir, "shell")
+    buildone_path = os.path.join(shell_dir, "buildone.sh")
 
     cmd = [
         buildone_path,
