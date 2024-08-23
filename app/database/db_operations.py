@@ -30,6 +30,13 @@ class ContainerModel(Base):
 def create_database():
     Base.metadata.create_all(bind=engine)
 
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
+
 def save_or_update_container(container: Container):
     db = SessionLocal()
     try:

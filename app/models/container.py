@@ -34,6 +34,7 @@ class Container(BaseModel):
 
     class Config:
         from_attributes = True
+        # 移除 orm_mode = True，因为 from_attributes 已经足够了
 
 class ContainerUpdate(BaseModel):
     cpu: Optional[int] = None

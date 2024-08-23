@@ -1,9 +1,11 @@
 import os
 import stat
 import logging
-from fastapi import FastAPI
+from fastapi import FastAPI, Depends, HTTPException, Header
 from app.database.db_operations import create_database
 from app.api import endpoints, instance_operations
+from app.database.database_queries import router as database_router
+from app.config import API_HASH
 
 # 设置日志
 logging.basicConfig(level=logging.INFO)
@@ -30,9 +32,18 @@ async def startup_event():
     
     logger.info("Startup complete")
 
-app.include_router(endpoints.router)
-app.include_router(instance_operations.router)
+def verify_api_hash(accesshash: str = Header(...)):
+    if accesshash != API_HASH:
+        raise HTTPException(status_code=403, detail="Invalid API hash")
+    return accesshash
+
+# 包含现有的路由，添加hash验证
+app.include_router(endpoints.router, dependencies=[Depends(verify_api_hash)])
+app.include_router(instance_operations.router, dependencies=[Depends(verify_api_hash)])
+app.include_router(database_router, prefix="/db", tags=["database"], dependencies=[Depends(verify_api_hash)])
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run("app.main:app", host="0.0.0.0", port=80, reload=True)
+
+
