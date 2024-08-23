@@ -4,12 +4,12 @@ incus功能性api
 apt install git python3 python3-pip
 rm /usr/lib/python3.11/EXTERNALLY-MANAGED
 git clone https://github.com/xkatld/incus-api.git
-chmod 777 ./incus-api/shell/*
-cp ./incus-api/shell/* /usr/local/bin/
+chmod 777 ./incus-api/app/shell/*
+cp ./incus-api/app/shell/* /usr/local/bin/
 ~~~
 首先安装incus
 ~~~
-bash ./incus-api/app/shell/buildone.sh
+bash ./incus-api/app/shell/install_incus.sh
 ~~~
 安装python3依赖
 ~~~
