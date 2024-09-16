@@ -23,7 +23,22 @@ uvicorn app.main:app --host 0.0.0.0 --port 8080 --reload
 ~~~
 # api示例
 ~~~
-curl -X POST "http://localhost:8000/containers/" -H "Content-Type: application/json" -d '{"cpu": 2, "memory": 1024, "disk": 20, "download_speed": 100, "upload_speed": 10, "ipv6": "N", "system": "debian11"}'
-
-curl -X POST "http://localhost:8000/instances/kd5pzzme/stop"
+创建服务器api：
+curl -X POST "http://xxx:8080/containers/" -H "Content-Type: application/json" -d '{"cpu": 2, "memory": 1024, "disk": 20, "download_speed": 100, "upload_speed": 10, "ipv6": "N", "system": "debian11"}' -H "accesshash: xxx"
+关机服务器api：
+curl -X POST "http://localhost:8000/instances/$name/start" -H "accesshash: xxx"
+开机服务器api：
+curl -X POST "http://localhost:8000/instances/$name/stop" -H "accesshash: xxx"
+重启服务器api：
+curl -X POST "http://localhost:8000/instances/$name/restart" -H "accesshash: xxx"
+删除服务器api：
+curl -X POST "http://localhost:8000/instances/$name/delete" -H "accesshash: xxx"
+暂停服务器api：
+curl -X POST "http://localhost:8000/instances/$name/pause" -H "accesshash: xxx"
+恢复服务器api：
+curl -X POST "http://localhost:8000/instances/$name/resume" -H "accesshash: xxx"
+查询服务器:
+curl -X GET "http://xxx:xxx/db/containers" -H "accesshash: xxx"
+查询单个服务器：
+curl -X GET "http://xxx:xxx/db/containers/$name" -H "accesshash: xxx"
 ~~~
